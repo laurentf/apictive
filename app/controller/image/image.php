@@ -53,7 +53,7 @@ class Image {
 				}
 				else {
 					// test GIF
-					$this->buildPixelGif($fullPath);
+					//$this->buildPixelGif($fullPath);
 					$tImg = new \Image($fullPath);
 				}
 				
@@ -197,16 +197,16 @@ class Image {
 		];
 
 		// Create an array containing the duration (in millisecond) of each frames (in order too)
-		$durations = [20, 20, 20, 20, 20, 20, 20, 20, 20];
+		$durations = [100, 100, 100, 100, 100, 100, 100, 100, 100];
 
 		// Initialize and create the GIF !
 		$gc = new \GifCreator\GifCreator();
-		$gc->create($frames, $durations, 10);
+		$gc->create($frames, $durations, 100);
 
 		$gifBinary = $gc->getGif();
 
 		header('Content-type: image/gif');
-		//header('Content-Disposition: filename="test.gif"');
+		header('Content-Disposition: filename="img.gif"');
 		die($gifBinary);
 	}
 }
