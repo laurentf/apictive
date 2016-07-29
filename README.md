@@ -14,12 +14,12 @@ Different methods (i need to list them all) but the classic route is something l
 
 **GET** /image/transform/**@operations**?img=YOUR_URL 
 
-The operations param generally looks like something like 
+The operations param can be something like... 
 
 /rotate,60|crop,100,100|sepia
 
 /pixel,20|bright,20|hflip
 
-I am sure if you want to try it you'll understand the following expression (it'll help you to define @parameters depending on your need)
+I am sure if you really want to use it it you'll understand the following expression (it'll help you to define @parameters depending on your needs)
 
  $pattern = '/(resize,(\d)*,(\d)*,(crop|d),(enlarge|d)|pixel,(\d)*|bright,(-|)(\d)*|contrast,(-|)(\d)*|rotate,(\d)*|smooth,(-|)(\d)*|vflip|hflip|invert|grey|sepia|emboss|sketch|blur,(selective|d))/im';
