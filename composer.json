@@ -1,0 +1,16 @@
+{
+	"name": "F3Community/fatfree-composer-app",
+	"description": "base composer package using fat-free framework",
+	"config": {
+		"vendor-dir": "lib"
+	},
+	"require": {
+		"bcosca/fatfree-core": "dev-master",
+		"voryx/thruway": "^0.3.10",
+        "hybridauth/hybridauth": "^2.5",
+		"respect/validation": "^0.9.1",
+		"leafo/lessphp": "^0.5.0",
+		"natxet/CssMin": "^3.0",
+		"sybio/gif-creator": "^1.0"
+	}
+}

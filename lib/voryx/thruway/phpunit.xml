@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        syntaxCheck="false"
+        bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="Thruway Tests">
+            <directory>tests/</directory>
+            <exclude>tests/WAMP/ReplaceOrphanedSessionTest.php</exclude>
+            <exclude>tests/WAMP/MultipleRegistrationTest.php</exclude>
+            <exclude>tests/WAMP/PingTest.php</exclude>
+            <exclude>tests/WAMP/TopicStateTest.php</exclude>
+            <exclude>tests/Unit/Topic/TopicStateManagerTest.php</exclude>
+            <exclude>tests/Crossbar/CrossbarTest.php</exclude>
+        </testsuite>
+    </testsuites>
+
+</phpunit>
