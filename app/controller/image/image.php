@@ -32,7 +32,7 @@ class Image {
 				$response->url = $params[0];
 				$response->mime = $properties['mime'];
 
-				// if the file already exist we directly use it (very simple cache system)
+				// if the file already exist we directly use it (very simple and dirty cache system)
 				if (!file_exists($fullPath)) {
 					switch($properties['mime']) {
 						case 'image/jpeg' : 
@@ -52,8 +52,6 @@ class Image {
 					$tImg = $this->process($fullPath, $operations);
 				}
 				else {
-					// test GIF
-					//$this->buildPixelGif($fullPath);
 					$tImg = new \Image($fullPath);
 				}
 				
@@ -102,7 +100,6 @@ class Image {
 	private function process($fullPath, $operations) {
 		// processing here
 		$tImg = new \Image($fullPath);
-		//$tImg->pixelate(30);
 		$rotate = false;
 		foreach($operations as $operation){
 			$ope = explode(',', $operation);
@@ -171,42 +168,28 @@ class Image {
 	}
 
 	private function buildPixelGif($fullPath) {
-		$oImg = new \Image($fullPath);
-		$oImg->resize(300,300,true);
-
-		$img100 = $oImg->pixelate(100);
-		$img80 = $oImg->pixelate(80);
-		$img50 = $oImg->pixelate(50);
-		$img30 = $oImg->pixelate(30);
-		$img20 = $oImg->pixelate(20);
-		$img10 = $oImg->pixelate(10);
-		$img5 = $oImg->pixelate(5);
-		$img2 = $oImg->pixelate(2);
-		$img1 = $oImg->pixelate(1);
-
-		$frames = [
-				imagecreatefromstring($img100->dump()),
-				imagecreatefromstring($img80->dump()),
-				imagecreatefromstring($img50->dump()),
-				imagecreatefromstring($img30->dump()),
-				imagecreatefromstring($img20->dump()),
-				imagecreatefromstring($img10->dump()),
-				imagecreatefromstring($img5->dump()),
-				imagecreatefromstring($img2->dump()),
-				imagecreatefromstring($img1->dump())
-		];
-
+		$sizes = [80, 50, 30, 20, 10, 5, 1];
+		$frames = [];
+		$cpt = 0;
+		foreach($sizes as $s) {
+			$oImg = new \Image($fullPath);
+			$oImg->resize(300,300,true);
+			$oImg->pixelate($s);
+			$frames[$cpt] = imagecreatefromstring($oImg->dump());
+			$cpt++;
+		}
+		
 		// Create an array containing the duration (in millisecond) of each frames (in order too)
-		$durations = [100, 100, 100, 100, 100, 100, 100, 100, 100];
+		$durations = [50, 50, 50, 50, 50, 50, 50];
 
 		// Initialize and create the GIF !
 		$gc = new \GifCreator\GifCreator();
-		$gc->create($frames, $durations, 100);
+		$gc->create($frames, $durations); // infinite loop
 
 		$gifBinary = $gc->getGif();
 
 		header('Content-type: image/gif');
-		header('Content-Disposition: filename="img.gif"');
+		header('Content-Disposition: filename="img'.time().'.gif"');
 		die($gifBinary);
 	}
 }
