@@ -21,6 +21,6 @@ The operations param can be something like...
 
 /pixel,20|bright,20|hflip
 
-I am sure if you really want to use it it you'll understand the following expression (it'll help you to define @parameters depending on your needs)
+I am sure if you really want to use it, you'll understand the following expression (it'll help you to define @parameters depending on your needs)
 
  $pattern = '/(resize,(\d)*,(\d)*,(crop|d),(enlarge|d)|pixel,(\d)*|bright,(-|)(\d)*|contrast,(-|)(\d)*|rotate,(\d)*|smooth,(-|)(\d)*|vflip|hflip|invert|grey|sepia|emboss|sketch|blur,(selective|d))/im';
